@@ -76,6 +76,11 @@ public class PlayerController : MonoBehaviour
             FileConverter.ConvertXYZtoOFF("Assets/Resources/PointClouds/Untitled.xyz", "Assets/Resources/PointClouds/pointcloud.off");
         }
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            FileConverter.ConvertOFFtoXYZ("Assets/Resources/PointClouds/pointcloud.off", "Assets/Resources/PointClouds/Untitled1.xyz");
+        }
+
     }
 
     private void Move()
