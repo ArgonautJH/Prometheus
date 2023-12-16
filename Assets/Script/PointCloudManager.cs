@@ -17,7 +17,7 @@ public class PointCloudManager : MonoBehaviour {
 	// PointCloud
 	private GameObject pointCloud;
 
-	public float scale = 1;
+	public float scale = 1f;			// 포인트 클라우드 크기 조절
 	public bool invertYZ = false;
 	public bool forceReload = false;
 

@@ -71,6 +71,11 @@ public class PlayerController : MonoBehaviour
             ToggleMode();
         }
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            FileConverter.ConvertXYZtoOFF("Assets/Resources/PointClouds/Untitled.xyz", "Assets/Resources/PointClouds/pointcloud.off");
+        }
+
     }
 
     private void Move()
