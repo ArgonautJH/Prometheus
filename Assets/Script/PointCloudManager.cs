@@ -107,8 +107,6 @@ public class PointCloudManager : MonoBehaviour {
 			}
 		}
 
-		
-		// Instantiate Point Groups
 		numPointGroups = Mathf.CeilToInt (numPoints*1.0f / limitPoints*1.0f);
 
 		pointCloud = new GameObject (filename);
@@ -194,7 +192,7 @@ public class PointCloudManager : MonoBehaviour {
 
 
 	void OnGUI(){
-		if (!loaded){
+		if (!loaded && progress > 0){
 			GUI.BeginGroup (new Rect(Screen.width/2-100, Screen.height/2, 400.0f, 20));
 			GUI.Box (new Rect (0, 0, 200.0f, 20.0f), guiText);
 			GUI.Box (new Rect (0, 0, progress*200.0f, 20), "");
