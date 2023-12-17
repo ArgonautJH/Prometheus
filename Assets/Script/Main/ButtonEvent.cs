@@ -26,11 +26,9 @@ public class ButtonEvent : MonoBehaviour
 
     }
 
-    // 버튼 클릭시 현재 자신의 text를 출력하는 함수
     public void PlayStart()
     {
         SceneManager.LoadScene("PlayScene");
-
     }
 
 

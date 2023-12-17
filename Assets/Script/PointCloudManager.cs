@@ -29,16 +29,21 @@ public class PointCloudManager : MonoBehaviour {
 	private Color[] colors;
 	private Vector3 minValue;
 
-	
-	void Start () {
-		// Create Resources folder
-		createFolders ();
-
-		// Get Filename
-		filename = Path.GetFileName(dataPath);
-
-		loadScene ();
+	public string FileName
+	{
+		get { return filename; }
+		set { filename = value; }
 	}
+
+	
+	// void Start () {
+
+	// 	createFolders ();
+
+	// 	filename = Path.GetFileName(dataPath);
+
+	// 	loadScene ();
+	// }
 
 
 
