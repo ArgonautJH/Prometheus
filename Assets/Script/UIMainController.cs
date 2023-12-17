@@ -7,6 +7,7 @@ public class UIMainController : MonoBehaviour
 {
 
     public Text modeText; // 현재 플레이어 모드 텍스트
+    public GameObject fileLoadWindow; // 파일 로드 창
 
     [SerializeField]
     private GameObject optionWindow; // 옵션 창

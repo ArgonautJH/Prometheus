@@ -32,22 +32,12 @@ public class PointCloudManager : MonoBehaviour {
 	public string FileName
 	{
 		get { return filename; }
-		set { filename = value; }
+		set { 
+			filename = Path.GetFileName(value); 
+		}
 	}
 
-	
-	// void Start () {
-
-	// 	createFolders ();
-
-	// 	filename = Path.GetFileName(dataPath);
-
-	// 	loadScene ();
-	// }
-
-
-
-	void loadScene(){
+	public void loadScene(){
 		// Check if the PointCloud was loaded previously
 		if(!Directory.Exists (Application.dataPath + "/Resources/PointCloudMeshes/" + filename)){
 			UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources/PointCloudMeshes", filename);
@@ -197,7 +187,7 @@ public class PointCloudManager : MonoBehaviour {
 			minValue.z = point.z;
 	}
 
-	void createFolders(){
+	public void createFolders(){
 		if(!Directory.Exists (Application.dataPath + "/Resources/"))
 			UnityEditor.AssetDatabase.CreateFolder ("Assets", "Resources");
 

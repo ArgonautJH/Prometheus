@@ -47,8 +47,16 @@ public class UIButtonEvent : MonoBehaviour
 
     }
 
+    // 메인 홈으로 이동
     public void Home()
     {
         SceneManager.LoadScene("Menu 3D");
+    }
+
+    // 파일 주소를 받아서 포인트 클라우드를 생성 시작
+    public void PlayStart()
+    {
+        //PloyMainController에 신호를 전달
+        GameObject.Find("PlayMainController").GetComponent<PlayMainController>().PlayStart();
     }
 }
