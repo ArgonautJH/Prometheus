@@ -14,6 +14,9 @@ public class PlayMainController : MonoBehaviour
 
     private bool isPointCloudUpdated = false; // 포인트 클라우드 업데이트 여부를 나타내는 플래그
 
+    private Coroutine moveCoroutine; // 코루틴 동작을 제어하기 위한 변수
+    private bool isPaused = false;  // 일시정지 여부를 나타내는 변수
+
     void Awake()
     {
         pointCloudManager = GameObject.Find("PointCloudManager").GetComponent<PointCloudManager>(); // PointCloudManager 오브젝트의 PointCloudManager 스크립트를 가져옴
@@ -39,6 +42,8 @@ public class PlayMainController : MonoBehaviour
                 uiMainController.slider.GetComponent<Slider>().maxValue = count; // 슬라이더의 최대값 설정
 
                 uiMainController.slider.GetComponent<Slider>().onValueChanged.AddListener(OnSliderValueChanged); // 슬라이더 값 변경 이벤트 추가
+
+                uiMainController.sliderButtonStart.GetComponent<Button>().onClick.AddListener(MoveSliderToEnd); // 슬라이더 버튼 클릭 이벤트 추가
 
                 isPointCloudUpdated = true; // 업데이트가 실행되었음을 표시
             }
@@ -79,6 +84,53 @@ public class PlayMainController : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             pointCloudManager.PointTarget.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    // 슬라이더 값을 끝까지 자동으로 이동시키는 함수
+    void MoveSliderToEnd(){
+        // 슬라이더 값을 현재 위치에서 moveToValue로 이동
+        if (moveCoroutine != null)
+        {
+            // 코루틴이 실행 중인 경우에만 일시정지/재개
+            isPaused = !isPaused;
+            if (isPaused)
+            {
+                StopCoroutine(moveCoroutine);
+            }
+            else
+            {
+                moveCoroutine = StartCoroutine(MoveSliderToEndCoroutine());
+            }
+        }
+        else
+        {
+            // 최초 실행
+            moveCoroutine = StartCoroutine(MoveSliderToEndCoroutine());
+        }
+    }
+
+
+    // 슬라이더 값을 끝까지 자동으로 이동시키는 코루틴
+    IEnumerator MoveSliderToEndCoroutine()
+    {
+        // 슬라이더의 최대값
+        float maxValue = uiMainController.slider.GetComponent<Slider>().maxValue;
+
+        // 슬라이더의 현재값
+        float currentValue = uiMainController.slider.GetComponent<Slider>().value;
+
+        // 슬라이더의 현재값이 최대값보다 작은 경우
+        while (currentValue < maxValue)
+        {
+            // 슬라이더의 값을 1씩 증가
+            uiMainController.slider.GetComponent<Slider>().value += 1;
+
+            // 슬라이더의 현재값 갱신
+            currentValue = uiMainController.slider.GetComponent<Slider>().value;
+
+            // 0.1초 대기
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

@@ -14,7 +14,10 @@ public class UIMainController : MonoBehaviour
     public GameObject activeWindow; // 현재 활성화된 창
 
     public GameObject slider; // 슬라이더
-
+    /// <summary>
+    /// 현재는 이렇게 3개로 하였으나 나중에는 하나의 버튼으로 처리할 수 있도록 수정할 것
+    /// </summary>
+    public GameObject sliderButtonStart; // 슬라이더 버튼 [슬라이더 자동 값 추가를 위해]
     public void SetModeText(string mode)
     {
         // 예외 처리: 텍스트 컴포넌트가 없는 경우 에러 출력

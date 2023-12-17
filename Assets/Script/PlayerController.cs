@@ -72,11 +72,13 @@ public class PlayerController : MonoBehaviour
             }
 
             uiMainController.slider.SetActive(false);
+            uiMainController.sliderButtonStart.SetActive(false);
         }
 
         if(currentMode == PlayerMode.Cam)
         {
             uiMainController.slider.SetActive(true);
+            uiMainController.sliderButtonStart.SetActive(true);
         }
 
         // T키 입력시 현재 Mode를 전환 및 텍스트 변경
