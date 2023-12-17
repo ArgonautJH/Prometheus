@@ -7,15 +7,11 @@ public class UIMainController : MonoBehaviour
 {
 
     public Text modeText; // 현재 플레이어 모드 텍스트
+    public GameObject optionWindow; // 옵션 창
     public GameObject fileLoadWindow; // 파일 로드 창
+    public GameObject fileExportWindow; // 파일 내보내기 창
 
-    [SerializeField]
-    private GameObject optionWindow; // 옵션 창
-
-    void Awake()
-    {
-        optionWindow.SetActive(false); // 옵션 창 비활성화
-    }
+    public GameObject activeWindow; // 현재 활성화된 창
 
     public void SetModeText(string mode)
     {

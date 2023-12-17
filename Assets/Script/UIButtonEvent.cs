@@ -37,13 +37,17 @@ public class UIButtonEvent : MonoBehaviour
     public void OpenWindow()
     {
         uiMainController.OpenOptionWindow(); // UIMainController 스크립트의 OpenWindow 함수 호출
+
+        uiMainController.activeWindow = uiMainController.optionWindow; // 현재 활성화된 창 설정
     }
 
     // 클릭 시 현재 오브젝트의 부모 오브젝트를 비활성화
-    public void OptionWindowCancel(){
+    public void WindowCancel(){
         GameObject clickTarget = EventSystem.current.currentSelectedGameObject; // 클릭한 오브젝트를 가져옴
 
         clickTarget.transform.parent.gameObject.SetActive(false); // 클릭한 오브젝트의 부모 오브젝트를 비활성화
+
+        uiMainController.activeWindow = null; // 현재 활성화된 창 초기화
 
     }
 
@@ -58,5 +62,22 @@ public class UIButtonEvent : MonoBehaviour
     {
         //PloyMainController에 신호를 전달
         GameObject.Find("PlayMainController").GetComponent<PlayMainController>().PlayStart();
+    }
+
+    // importFileWindow 창을 활성화
+    public void OpenImportFileWindow()
+    {
+        uiMainController.optionWindow.SetActive(false); // 옵션 창 비활성화
+        uiMainController.fileLoadWindow.SetActive(true); // 파일 로드 창 활성화
+
+        uiMainController.activeWindow = uiMainController.fileLoadWindow; // 현재 활성화된 창 설정
+    }
+
+    public void OpenExportFileWindow()
+    {
+        uiMainController.optionWindow.SetActive(false); // 옵션 창 비활성화
+        uiMainController.fileExportWindow.SetActive(true); // 파일 내보내기 창 활성화.
+
+        uiMainController.activeWindow = uiMainController.fileExportWindow; // 현재 활성화된 창 설정
     }
 }

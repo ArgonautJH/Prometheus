@@ -73,7 +73,7 @@ public class PointCloudManager : MonoBehaviour {
 		loaded = true;
 	}
 	
-	// Start Coroutine of reading the points from the OFF file and creating the meshes
+	// OFF 파일에서 포인트를 읽고 메쉬를 생성하는 코루틴을 시작
 	IEnumerator loadOFF(string dPath){
 
 		// Read file
@@ -98,9 +98,6 @@ public class PointCloudManager : MonoBehaviour {
 				colors[i] = new Color (int.Parse (buffer[3])/255.0f,int.Parse (buffer[4])/255.0f,int.Parse (buffer[5])/255.0f);
 			else
 				colors[i] = Color.cyan;
-
-			// Relocate Points near the origin
-			//calculateMin(points[i]);
 
 			// GUI
 			progress = i *1.0f/(numPoints-1)*1.0f;
