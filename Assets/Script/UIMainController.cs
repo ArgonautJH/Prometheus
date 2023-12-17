@@ -13,6 +13,8 @@ public class UIMainController : MonoBehaviour
 
     public GameObject activeWindow; // 현재 활성화된 창
 
+    public GameObject slider; // 슬라이더
+
     public void SetModeText(string mode)
     {
         // 예외 처리: 텍스트 컴포넌트가 없는 경우 에러 출력
@@ -30,5 +32,11 @@ public class UIMainController : MonoBehaviour
     {
         // 옵션 창 활성화
         optionWindow.SetActive(true);
+    }
+
+    public void SetSliderValue(float value)
+    {
+        // 슬라이더의 값을 value로 설정
+        slider.GetComponent<Slider>().value = value;
     }
 }

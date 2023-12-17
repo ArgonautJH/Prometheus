@@ -37,6 +37,12 @@ public class PointCloudManager : MonoBehaviour {
 		}
 	}
 
+	private GameObject pointTarget;
+	public GameObject PointTarget
+	{
+		get { return pointTarget; }
+	}
+
 	public void loadScene(){
 		// Check if the PointCloud was loaded previously
 		if(!Directory.Exists (Application.dataPath + "/Resources/PointCloudMeshes/" + filename)){
@@ -69,6 +75,8 @@ public class PointCloudManager : MonoBehaviour {
 		Debug.Log ("Using previously loaded PointCloud: " + filename);
 
 		GameObject pointGroup = Instantiate(Resources.Load ("PointCloudMeshes/" + filename)) as GameObject;
+
+		pointTarget = pointGroup;
 
 		loaded = true;
 	}
@@ -122,6 +130,8 @@ public class PointCloudManager : MonoBehaviour {
 
 		//Store PointCloud
 		UnityEditor.PrefabUtility.CreatePrefab ("Assets/Resources/PointCloudMeshes/" + filename + ".prefab", pointCloud);
+
+		pointTarget = pointCloud;	
 
 		loaded = true;
 	}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class PlayerController : MonoBehaviour
     private PlayerMode currentMode; // 현재 플레이어 모드
     private UIMainController uiMainController; // UI 메인 컨트롤러
 
+    public PlayerMode CurrentMode
+    {
+        get { return currentMode; }
+    }
+
 
     [SerializeField] private float moveSpeed;           // 케릭터 이동속도
     [SerializeField] private float mouseSensitivity;    // 마우스 감도
@@ -25,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();            // 케릭터 리지드바디 컴포넌트 가져오기
-        
+
         camUpdatable = GetComponentInChildren<ICamUpdatable>(); // 카메라 제어 인터페이스 컴포넌트 가져오기
 
         currentMoveSpeed = moveSpeed;                           // 현재 케릭터 이동속도 초기화
@@ -45,7 +51,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentMode == PlayerMode.Move){
+        if (currentMode == PlayerMode.Move)
+        {
             Move();
 
             // 마우스 좌클릭하며 마우스 이동시 카메라 화면 전환
@@ -54,15 +61,22 @@ public class PlayerController : MonoBehaviour
                 camUpdatable.UpdateRotation(gameObject, mouseSensitivity);
             }
 
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 currentMoveSpeed = moveSpeed * 10;
             }
 
-            if(Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 currentMoveSpeed = moveSpeed;
             }
+
+            uiMainController.slider.SetActive(false);
+        }
+
+        if(currentMode == PlayerMode.Cam)
+        {
+            uiMainController.slider.SetActive(true);
         }
 
         // T키 입력시 현재 Mode를 전환 및 텍스트 변경
